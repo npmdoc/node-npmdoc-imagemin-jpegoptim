@@ -1,0 +1,129 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/imagemin/imagemin-jpegoptim#readme">imagemin-jpegoptim (v5.0.0)</a>
+</h1>
+<h4>jpegoptim imagemin plugin</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.imagemin-jpegoptim">module imagemin-jpegoptim</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.imagemin-jpegoptim.imagemin-jpegoptim">
+            function <span class="apidocSignatureSpan"></span>imagemin-jpegoptim
+            <span class="apidocSignatureSpan">({}, opts)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.imagemin-jpegoptim" id="apidoc.module.imagemin-jpegoptim">module imagemin-jpegoptim</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.imagemin-jpegoptim.imagemin-jpegoptim" id="apidoc.element.imagemin-jpegoptim.imagemin-jpegoptim">
+        function <span class="apidocSignatureSpan"></span>imagemin-jpegoptim
+        <span class="apidocSignatureSpan">({}, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">opts =&gt; buf =&gt; {
+	opts = Object.assign({}, opts);
+
+	if (!Buffer.isBuffer(buf)) {
+		return Promise.reject(new TypeError(`Expected a Buffer, got ${typeof buf}`));
+	}
+
+	if (!isJpg(buf)) {
+		return Promise.resolve(buf);
+	}
+
+	const args = [
+		'--strip-all',
+		'--strip-iptc',
+		'--strip-icc',
+		'--stdin',
+		'--stdout'
+	];
+
+	if (opts.progressive) {
+		args.push('--all-progressive');
+	}
+
+	if (opts.max !== undefined) {
+		args.push(`--max=${opts.max}`);
+	}
+
+	if (opts.size) {
+		args.push(`--size=${opts.size}`);
+	}
+
+	return execa.stdout(jpegoptim, args, {
+		encoding: null,
+		input: buf
+	});
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
